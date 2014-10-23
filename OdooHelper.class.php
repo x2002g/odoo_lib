@@ -169,7 +169,7 @@ class OdooHelper {
 
         $context= array(
             'lang'      => 'zh_CN',
-            'bin_size'  => true,
+            'bin_size'  => false,
             'tz'        => 'Asiz/Shanghai',
             'uid'       => $this->uid,
         );
@@ -204,9 +204,15 @@ class OdooHelper {
             //$data   = array_merge($data, $new_data);
             foreach ($new_data as $item) {
                 // images
-                $code   = str_replace('/', '-', $item['code']);
-                $img_path       = $this->image_dir.'/'.$code.'.png';
-                file_put_contents($img_path, base64_decode($item['image_medium']));
+                $code   = trim(str_replace('/', '-', $item['code']));
+                if (empty($code)) {
+                    echo 'Empty code for product "'.$item['name'].'"'."\n";
+                    continue;
+                }
+
+                $img_path       = $this->image_dir.'/'.$code;
+                file_put_contents($img_path, base64_decode($item['image']));
+
                 $img_path_md    = $this->image_dir.'/'.$code.'_md.png';
                 file_put_contents($img_path_md, base64_decode($item['image_medium']));
                 $img_path_sm    = $this->image_dir.'/'.$code.'_sm.png';
