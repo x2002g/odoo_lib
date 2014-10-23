@@ -212,10 +212,12 @@ class OdooHelper {
                 $img_path_sm    = $this->image_dir.'/'.$code.'_sm.png';
                 file_put_contents($img_path_sm, base64_decode($item['image_small']));
 
+                $brand  = !empty($item['product_brand_id'][1]) ? $item['product_brand_id'][1]: '';
+
                 $row    = array(
                     $item['name'],
                     $item['code'],  // 商品货号
-                    $item['product_brand_id'],  // 商品品牌
+                    $brand,         // 商品品牌
                     $item['list_price'], // 市场售价
                     $item['list_price'], // 本店售价
                     '',// 积分购买额度
