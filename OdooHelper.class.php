@@ -254,6 +254,49 @@ class OdooHelper {
         return $count;
     }
 
+    public function get_all_category() {
+        $offset = 1;
+        $limit  = 50;
+        $data   = array();
+        while (true) {
+            $msg = new xmlrpcmsg('execute');
+            $msg->addParam(new xmlrpcval($this->dbname, "string"));
+            $msg->addParam(new xmlrpcval($this->uid, "int"));
+            $msg->addParam(new xmlrpcval($this->password, "string"));
+
+            $msg->addParam(new xmlrpcval('product.category', "string"));
+            $msg->addParam(new xmlrpcval('read', "string"));
+
+            # ids
+            $ids    = array();
+            for($i = 0; $i < $limit; $i++) {
+                $ids[]  = $offset + $i;
+            }
+            $msg->addParam($this->_format($ids));
+
+            # fields
+            $msg->addParam(new xmlrpcval(null, "null"));
+
+            # context
+            $context = array(
+                'lang'  => 'zh_CN',
+                'tz'    => 'Asia/Shanghai',
+                'uid'   => $this->uid
+            );
+            $msg->addParam($this->_format($context));
+
+            $resp   = $this->sock->send($msg);
+            $val    = $resp->value();
+            $new_data   = $this->_parse($val);
+            if (count($new_data) == 0) break;
+
+            $data   = array_merge($data, $new_data);
+
+            $offset += $limit;
+        }
+        return $data;
+    }
+
     //----------------------------------------------------------------
     // private methods
     

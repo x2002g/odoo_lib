@@ -19,13 +19,14 @@ function test_get_qty() {
 
 function test_get_product_data_by_ids() {
     $helper = new OdooHelper();
-    $ids    = array(1, 2, 25);
+    //$ids    = array(1, 2, 25);
+    $ids    = array(25);
     // specified fields
     //$fields = array('name', 'code', 'product_brand_id', 'list_price', 'image', 'image_medium', 'image_small', 'description', 'weight', 'qty_available', 'sale_ok');
-    $fields = array('name', 'code', 'product_brand_id', 'list_price', 'description', 'weight', 'qty_available', 'sale_ok');
-    $result = $helper->get_product_data_by_ids($ids, $fields);
+    $fields = array('name', 'code', 'product_brand_id', 'list_price', 'description', 'weight', 'qty_available', 'sale_ok', 'image');
+    //$result = $helper->get_product_data_by_ids($ids, $fields);
     // all fields
-    //$result = $helper->get_product_data_by_ids($ids);
+    $result = $helper->get_product_data_by_ids($ids);
     var_dump($result);
 }
 //test_get_product_data_by_ids();
@@ -45,3 +46,10 @@ function test_create_order() {
 }
 //test_create_order();
 
+function test_get_all_category() {
+    $helper = new OdooHelper();
+    // all fields
+    $result = $helper->get_all_category();
+    var_dump($result);
+}
+//test_get_all_category();
