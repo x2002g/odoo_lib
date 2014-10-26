@@ -27,7 +27,8 @@ function test_get_product_data_by_ids() {
     //$result = $helper->get_product_data_by_ids($ids, $fields);
     // all fields
     $result = $helper->get_product_data_by_ids($ids);
-    var_dump($result);
+    //var_dump($result);
+    var_export($result);
 }
 //test_get_product_data_by_ids();
 
@@ -50,6 +51,26 @@ function test_get_all_category() {
     $helper = new OdooHelper();
     // all fields
     $result = $helper->get_all_category();
-    var_dump($result);
+    //var_dump($result);
+    var_export($result);
 }
 //test_get_all_category();
+
+//-----------------------------------------------------
+// for EcshopHelper
+include './EcshopHelper.class.php';
+
+function test_import_category() {
+    $helper = new EcshopHelper();
+    $count  = $helper->import_category();
+    var_dump($count);
+}
+//test_import_category();
+
+function test_import_product() {
+    $helper = new EcshopHelper();
+    $count  = $helper->import_product();
+    var_dump($count);
+}
+//test_import_product();
+

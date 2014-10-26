@@ -186,7 +186,7 @@ class OdooHelper {
         $start  = 1;
         $limit  = 50;
 
-         $fields = array('name', 'code', 'product_brand_id', 'list_price', 'image', 'image_medium', 'image_small', 'description', 'weight', 'qty_available', 'sale_ok');
+        $fields = array('name', 'code', 'product_brand_id', 'list_price', 'image', 'image_medium', 'image_small', 'description', 'weight', 'qty_available', 'sale_ok');
 
         $count  = 0;
         $file   = fopen($path, 'wb');
